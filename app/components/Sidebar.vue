@@ -1,22 +1,48 @@
 <template>
-    <aside class="w-20 bg-neutral flex flex-col items-center py6 gap-6">
-        <span class="text-white font-bold text-xs">miCoach Path</span>
+    <aside class="w-20 bg-primary flex flex-col items-center py6 gap-6">
+        <span class="text-white font-bold text-xs text-center p-4">miCoach Path</span>
         <ul class="flex flex-col gap-4 mt-4">
             <li v-for="item in navItems" :key="item.label">
-                <NuxtLink :to="item.to" class="flex flex-col items-center gap-1 text-neutral-content opacity-60 hover:opacity-100 transition-opacity" active-class="!opacity-100">
-                    <component :is="item.icon" class="w-5 h-5" />
-                    <span class="text-[9px] uppercase tracking-widest">{{ item.label }}</span>
+                <NuxtLink :to="item.to" class="flex flex-col p-3 items-center gap-1 text-neutral-content opacity-60 hover:opacity-100 transition-opacity" active-class="!opacity-100">
+                    <font-awesome-icon :icon="setIcon(item.icon)" />
+                    <span class="text-[9px] p-2 uppercase tracking-widest text-center">{{ item.label }}</span>
                 </NuxtLink>
             </li>
         </ul>
     </aside>
 </template>
 <script setup lang="ts">
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faBrain, faChartColumn, faCloudArrowUp, faHome, faRoute, type IconDefinition } from '@fortawesome/free-solid-svg-icons';
+
 const navItems = [
-    { label: 'Inicio', to: '/dashboard', icon: 'HomeIcon' },
-    { label: 'Resume', to: '/resume/upload', icon: 'HomeIcon' },
-    { label: 'Career Path', to: '/career-path', icon: 'HomeIcon' },
-    { label: 'Skills Gap', to: '/skills-gap', icon: 'HomeIcon' },
-    { label: 'OKRs', to: '/dashboard', icon: 'HomeIcon' },
+    { label: 'Home', to: '/dashboard', icon: 'faHome' },
+    { label: 'Resume', to: '/resume/upload', icon: 'faCloudArrowUp' },
+    { label: 'Career Path', to: '/career-path', icon: 'faRoute' },
+    { label: 'Skills Gap', to: '/skills-gap', icon: 'faBrain' },
+    { label: 'OKRs', to: '/dashboard', icon: 'faChartColumn' },
 ];
+
+function setIcon(iconName: String): IconDefinition {
+    switch(iconName) {
+        case 'faHome':
+            return faHome
+        break;
+        case 'faCloudArrowUp':
+            return faCloudArrowUp
+        break;
+        case 'faRoute':
+            return faRoute
+        break;
+        case 'faBrain':
+            return faBrain
+        break;
+        case 'faChartColumn':
+            return faChartColumn
+        break;
+
+        default:
+            return faHome
+    }
+}
 </script>
