@@ -15,7 +15,7 @@ const selectedFile = ref(null)
             </p>
         </div>
 
-        <DropZone />
+        <DropZone v-model="selectedFile" />
 
         <div class="divider text-xs text-base-content/40">Available formats</div>
 
@@ -33,7 +33,7 @@ const selectedFile = ref(null)
             :class="selectedFile ? 'btn-success' : 'btn-disabled'"
             :disabled="!selectedFile" 
             @click="submitResume" v-if="submitted === false">
-            Analyze resume with AI
+            {{ selectedFile ? 'Analyze resume with AI' : 'Please select a file' }}
         </button>
 
         <div v-if="submitted === true">
