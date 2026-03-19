@@ -1,0 +1,24 @@
+{
+  "name": "micoachpath-web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "dependencies": {
+    "@nuxt/content": "^3.12.0",
+    "@tailwindcss/vite": "^4.2.2",
+    "better-sqlite3": "^12.8.0",
+    "daisyui": "^5.5.19",
+    "nuxt": "^4.4.2",
+    "tailwindcss": "^4.2.2"
+  },
+  "devDependencies": {
+    "@fortawesome/free-brands-svg-icons": "^7.2.0",
+    "@fortawesome/free-solid-svg-icons": "^7.2.0",
+    "@nuxtjs/fontawesome": "^1.1.2"
+  }
+}
