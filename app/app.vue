@@ -1,6 +1,11 @@
 <template>
-  <Navbar />
-  <main class="mx-auto max-w-[1440px]">
-    <NuxtPage />
-  </main>
+  <div class="flex min-h-screen bg-base-100">
+    <Sidebar />
+    <div class="flex-1 flex flex-col">
+      <Navbar />
+      <main class="flex-1 p-8">
+        <RouterView />
+      </main>
+    </div>
+  </div>
 </template>

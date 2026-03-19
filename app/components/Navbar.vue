@@ -1,28 +1,17 @@
 <template>
-    <div class="navbar bg-base-100 shadow-sm">
-        <div class="flex-1">
-            <a class="btn btn-ghost text-xl">miCoach Path</a>
+    <header class="navbar bg-base-100 shadow-sm px-6">
+        <div class="navbar-start gap-6">
+            <NuxtLink to="/dashboard" class="text-sm font-medium opacity-70 hover:opacity-100">Dashboard</NuxtLink>
+            <NuxtLink to="/team" class="text-sm font-medium opacity-70 hover:opacity-100">My Team</NuxtLink>
+            <NuxtLink to="/settings" class="text-sm font-medium opacity-70 hover:opacity-100">Settings</NuxtLink>
         </div>
-        <div class="flex-none">
-            <ul class="menu menu-horizontal px-1">
-                <li><span>Daniel Barrera</span></li>
-            </ul>
-        </div>
-        <div class="dropdown dropdown-end">
-            <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-                <div class="w-10 rounded-full">
-                <img
-                    alt="Tailwind CSS Navbar component"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+        <div class="navbar-end gap-3">
+            <span class="text-sm">Daniel Barrera</span>
+            <div class="avatar placeholder">
+                <div class="bg-primary text-primary-content ronded-full w-8 text-center">
+                    <span class="text-xs">DB</span>
                 </div>
             </div>
-            <ul
-                tabindex="-1"
-                class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                <li><a>Profile</a></li>
-                <li><a>Settings</a></li>
-                <li><a>Logout</a></li>
-            </ul>
         </div>
-    </div>
+    </header>
 </template>

@@ -1,3 +1,7 @@
+<script setup lang="ts">
+definePageMeta({ layout: 'dashboard' })
+</script>
+
 <template>
     <section class="max-w-2xl mx-auto flex flex-col gap-8">
         <div class="text-center">
