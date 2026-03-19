@@ -2,6 +2,8 @@
 useHead({
     title: 'miCoach Path - Upload resume',
 })
+
+const selectedFile = ref(null)
 </script>
 
 <template>
@@ -27,7 +29,10 @@ useHead({
         </div>
         <!-- End Linkedin URL parsing -->
 
-        <button class="btn btn-success btn-lg w-full" @click="submitResume">
+        <button class="btn btn-lg w-full transition-all"
+            :class="selectedFile ? 'btn-success' : 'btn-disabled'"
+            :disabled="!selectedFile" 
+            @click="submitResume" v-if="submitted === false">
             Analyze resume with AI
         </button>
 

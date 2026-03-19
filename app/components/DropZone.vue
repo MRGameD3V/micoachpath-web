@@ -42,10 +42,8 @@
 import { faCloudArrowUp, faFile, faFileImport, faFilePdf, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-const emit = defineEmits(['file-selected']);
-
+const selectedFile = defineModel();
 const fileInput = ref(null);
-const selectedFile = ref(null);
 const isDragging = ref(false);
 
 const fileExtension = computed(() => selectedFile.value?.name.split('.').pop().toLowerCase() ?? '')
@@ -62,23 +60,17 @@ function triggerInput() {
 
 function onFileSelected(e) {
     const file = e.target.files?.[0];
-    if (file) setFile(file)
+    if (file) selectedFile.value = file
 }
 
 function onDrop(e) {
     isDragging.value = false
     const file = e.dataTransfer.files?.[0]
-    if(file) setFile(file)
-}
-
-function setFile(file) {
-    selectedFile.value = file
-    emit('file-selected', file)
+    if(file) selectedFile.value = file
 }
 
 function clearFile() {
     selectedFile.value = null
     fileInput.value.value = ''
-    emit('file-selected', null)
 }
 </script>
