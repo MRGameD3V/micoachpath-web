@@ -25,12 +25,27 @@ definePageMeta({ layout: 'dashboard' })
         </div>
         <!-- End Linkedin URL parsing -->
 
-        <button class="btn btn-neutral btn-lg w-full">
+        <button class="btn btn-success btn-lg w-full" @click="submitResume">
             Analyze resume with AI
         </button>
+
+        <div v-if="submitted === true">
+            <AnalysisStatus />
+        </div>
     </section>
 </template>
 <script lang="ts">
+import AnalysisStatus from '~/components/AnalysisStatus.vue';
 import DropZone from '~/components/DropZone.vue';
 import FormatCard from '~/components/FormatCard.vue';
+
+const submitted = ref(false)
+
+export default {
+    methods: {
+        submitResume() {
+            submitted.value = !submitted.value;
+        }
+    }
+}
 </script>

@@ -1,4 +1,4 @@
-# Nuxt Content Starter
+# miCoach Path
 
 Look at the [Nuxt Content documentation](https://content.nuxt.com) to learn more.
 
