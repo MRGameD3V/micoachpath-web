@@ -1,6 +1,6 @@
 <template>
-    <aside class="w-20 bg-white flex flex-col items-center py6 gap-6">
-        <span class="text-[#323232] font-bold text-sm text-center p-4">Path</span>
+    <aside class="w-20 bg-white flex flex-col items-center py6">
+        <img src="/favicon.ico" alt="miCoach" class="p-6">
         <ul class="flex flex-col gap-4 mt-4">
             <li v-for="item in navItems" :key="item.label">
                 <NuxtLink :to="item.to" class="flex flex-col p-3 items-center gap-1 text-[#323232] opacity-60 hover:opacity-100 transition-opacity" active-class="!opacity-100">
