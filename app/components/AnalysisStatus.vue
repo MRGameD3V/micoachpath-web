@@ -12,11 +12,23 @@
                 {{ step.label }}
             </span>
         </div>
+
+        <Transition name="slide-down">
+            <button v-if="isAnalyzing" class="btn btn-ghost btn-sm text-error w-full" @click="$emit('cancel')">
+                <FontAwesomeIcon :icon="faXmark" /> Cancel analysis
+            </button>
+        </Transition>
     </div>
 </template>
 <script setup lang="ts">
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
+const props = defineProps({
+    isAnalyzing: { type: Boolean, default: false }
+})
+
+const emit = defineEmits(['cancel'])
 
 const steps = ref([
     { label: 'File received', status: 'loading' },

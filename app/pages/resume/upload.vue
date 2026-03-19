@@ -1,9 +1,22 @@
 <script setup lang="ts">
+import AnalysisStatus from '~/components/AnalysisStatus.vue';
+import DropZone from '~/components/DropZone.vue';
+import FormatCard from '~/components/FormatCard.vue';
+
 useHead({
     title: 'miCoach Path - Upload resume',
 })
 
 const selectedFile = ref(null)
+const isAnalyzing = ref(false)
+
+function handleAnalyze() {
+    isAnalyzing.value = true;
+}
+
+function handleCancel() {
+    isAnalyzing.value = false;
+}
 </script>
 
 <template>
@@ -30,29 +43,16 @@ const selectedFile = ref(null)
         <!-- End Linkedin URL parsing -->
 
         <button class="btn btn-lg w-full transition-all"
-            :class="selectedFile ? 'btn-success' : 'btn-disabled'"
-            :disabled="!selectedFile" 
-            @click="submitResume" v-if="submitted === false">
-            {{ selectedFile ? 'Analyze resume with AI' : 'Please select a file' }}
+            :class="selectedFile && !isAnalyzing ? 'btn-success' : 'btn-disabled'"
+            :disabled="!selectedFile || isAnalyzing" 
+            @click="handleAnalyze">
+            <span v-if="isAnalyzing" class="loading loading-spinner loading-sm" />
+            <span v-if="!selectedFile">Please select a file</span>
+            <span v-else-if="isAnalyzing">Analyzing...</span>
+            <span v-else>Analyze resume with AI</span>
         </button>
 
-        <div v-if="submitted === true">
-            <AnalysisStatus />
-        </div>
+        
+        <AnalysisStatus :is-analyzing="isAnalyzing" @cancel="handleCancel" v-if="isAnalyzing" />
     </section>
 </template>
-<script lang="ts">
-import AnalysisStatus from '~/components/AnalysisStatus.vue';
-import DropZone from '~/components/DropZone.vue';
-import FormatCard from '~/components/FormatCard.vue';
-
-const submitted = ref(false)
-
-export default {
-    methods: {
-        submitResume() {
-            submitted.value = !submitted.value;
-        }
-    }
-}
-</script>
