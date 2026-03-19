@@ -1,9 +1,9 @@
 <template>
-    <aside class="w-20 bg-primary flex flex-col items-center py6 gap-6">
-        <span class="text-white font-bold text-xs text-center p-4">miCoach Path</span>
+    <aside class="w-20 bg-white flex flex-col items-center py6 gap-6">
+        <span class="text-[#323232] font-bold text-sm text-center p-4">Path</span>
         <ul class="flex flex-col gap-4 mt-4">
             <li v-for="item in navItems" :key="item.label">
-                <NuxtLink :to="item.to" class="flex flex-col p-3 items-center gap-1 text-neutral-content opacity-60 hover:opacity-100 transition-opacity" active-class="!opacity-100">
+                <NuxtLink :to="item.to" class="flex flex-col p-3 items-center gap-1 text-[#323232] opacity-60 hover:opacity-100 transition-opacity" active-class="!opacity-100">
                     <font-awesome-icon :icon="setIcon(item.icon)" />
                     <span class="text-[9px] p-2 uppercase tracking-widest text-center">{{ item.label }}</span>
                 </NuxtLink>
@@ -20,7 +20,7 @@ const navItems = [
     { label: 'Resume', to: '/resume/upload', icon: 'faCloudArrowUp' },
     { label: 'Career Path', to: '/career-path', icon: 'faRoute' },
     { label: 'Skills Gap', to: '/skills-gap', icon: 'faBrain' },
-    { label: 'OKRs', to: '/dashboard', icon: 'faChartColumn' },
+    { label: 'OKRs', to: '/okrs', icon: 'faChartColumn' },
 ];
 
 function setIcon(iconName: String): IconDefinition {
