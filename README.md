@@ -1,8 +1,14 @@
 # miCoach Path
 
+miCoach Path is a proposal for generating a career path wit Generative AI taking as source a PDF resume.
+
+This development is built with VueJS + Nuxt + DaisyUI, using FontAwesome for icons.
+
 Look at the [Nuxt Content documentation](https://content.nuxt.com) to learn more.
 
-## Setup
+## Development Instructions
+
+### Setup
 
 Make sure to install dependencies:
 
@@ -20,7 +26,7 @@ yarn install
 bun install
 ```
 
-## Development Server
+### Development Server
 
 Start the development server on `http://localhost:3000`:
 
@@ -38,7 +44,7 @@ yarn dev
 bun run dev
 ```
 
-## Production
+### Deploying to Production
 
 Build the application for production:
 

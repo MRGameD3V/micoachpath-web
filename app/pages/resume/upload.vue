@@ -1,5 +1,7 @@
 <script setup lang="ts">
-definePageMeta({ layout: 'dashboard' })
+useHead({
+    title: 'miCoach Path - Upload resume',
+})
 </script>
 
 <template>
