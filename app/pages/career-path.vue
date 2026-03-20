@@ -83,6 +83,6 @@ function iconByPath(id: string) {
 }
 
 function colorByPath(id: string) {
-
+    
 }
 </script>
