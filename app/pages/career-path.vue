@@ -26,7 +26,7 @@
                 </div>
 
                 <div v-if="!activePath" class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-6">
-                    <PathCard v-for="path in paths" :key="path.title" v-bind="path" />
+                    <PathCard v-for="path in paths" :key="path.title" v-bind="path" @select="selectPath(path)"/>
                 </div>
                 <PathDetail v-else
                     :path="activePath"
@@ -74,6 +74,11 @@ const paths = computed(() =>
         detail: path
     }))
 )
+
+function selectPath(path) {
+    const idx = result.value.recommended_paths.findIndex(p => p.path_id === path.detail.path_id)
+    activeTab.value = tabs.value[idx + 1]
+}
 
 /* Next steps: these methods should be on API or having a general way of assigning them. */
 function iconByPath(id: string) {

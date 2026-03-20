@@ -38,7 +38,7 @@
                 </div>
             </div>
 
-            <button class="btn btn-lg btn-primary w-full mt-auto font-semibold">
+            <button class="btn btn-lg btn-primary w-full mt-auto font-semibold" @click="emit('select')">
                 {{ ctaLabel }}
                 <span>{{ ctaIcon }}</span>
             </button>
@@ -61,4 +61,6 @@ defineProps({
     ctaIcon: {type: String, default: '->' },
     color: {type: String, default: '##0082ce' },
 })
+
+const emit = defineEmits(['select'])
 </script>
