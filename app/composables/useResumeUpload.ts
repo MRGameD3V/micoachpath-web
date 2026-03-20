@@ -1,4 +1,5 @@
 export function useResumeUpload() {
+    const { public: { apiBase } } = useRuntimeConfig()
     const steps = ref([
         { key: 'received_file', label: 'File received', status: 'pending' },
         { key: 'extracting_text', label: 'Extracting resume text', status: 'pending' },
@@ -22,13 +23,13 @@ export function useResumeUpload() {
         const formData = new FormData()
         formData.append('file', file)
 
-        const { jobId } = await $fetch('/api/analyze-resume', {
+        const { jobId } = await $fetch(`${apiBase}/analyze-cv`, {
             method: 'POST',
             body: formData
         })
 
         // 2. Open SSE for state listening
-        eventSource = new EventSource(`/api/analyze-resume/status/${jobId}`)
+        eventSource = new EventSource(`${apiBase}/analyze-cv/status/${jobId}`)
 
         eventSource.onmessage = (event) => {
             const parsed = JSON.parse(event.data);

@@ -11,13 +11,21 @@
                 <NuxtLink to="/resume/upload" class="btn btn-success btn-xl">Upload resume <FontAwesomeIcon :icon="faChevronCircleRight" /></NuxtLink>
             </div>
             <template v-else>
+                <div class="alert bg-base-200 border-none">
+                    <span class="text-sm">
+                        <strong>{{ result.profile_summary.current_level }}</strong> ·
+                        {{ result.profile_summary.estimated_experience_years }} years of experience ·
+                        Recommended path: <strong>{{ result.recommended_paths.find(path => path.path_id === result.profile_summary.recommended_primary_path)?.title }}</strong>
+                    </span>
+                </div>
+
                 <div class="tabs tabs-bordered">
                     <button v-for="tab in tabs" :key="tab" class="tab" :class="activeTab === tab ? 'tab-active font-semibold' : 'text-base-content/40'" @click="activeTab = tab">
                         {{ tab }}
                     </button>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-6">
                     <PathCard v-for="path in paths" :key="path.title" v-bind="path" />
                 </div>
             </template>
