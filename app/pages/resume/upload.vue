@@ -8,15 +8,19 @@ useHead({
 })
 
 const selectedFile = ref(null)
-const isAnalyzing = ref(false)
+const { steps, isAnalyzing, isDone, analyze, cancel } = useResumeUpload()
 
 function handleAnalyze() {
-    isAnalyzing.value = true;
+    if(selectedFile.value) analyze(selectedFile.value)
 }
 
 function handleCancel() {
     isAnalyzing.value = false;
 }
+
+watch(isDone, (done) => {
+    if(done) navigateTo('/career-path')
+})
 </script>
 
 <template>
@@ -53,6 +57,10 @@ function handleCancel() {
         </button>
 
         
-        <AnalysisStatus :is-analyzing="isAnalyzing" @cancel="handleCancel" v-if="isAnalyzing" />
+        <AnalysisStatus 
+            :steps="steps" 
+            :is-analyzing="isAnalyzing" 
+            :is-done="isDone"
+            @cancel="handleCancel" v-if="isAnalyzing" />
     </section>
 </template>

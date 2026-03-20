@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col gap-4">
-        <div class="border-l-4 border-primary p-6 flex flex-col gap-4">
+        <div class="border-l-4 border-primary rounded-lg p-6 flex flex-col gap-4">
             <p class="font-semibold">Analyzing status</p>
 
             <div v-for="step in steps" :key="step.label" class="flex items-center gap-3">
@@ -16,7 +16,7 @@
         </div>
 
         <Transition name="slide-down">
-            <button v-if="isAnalyzing" class="btn btn-ghost btn-sm text-error w-full" @click="$emit('cancel')">
+            <button v-if="isAnalyzing" class="btn btn-ghost btn-sm text-error w-full" @click="emit('cancel')">
                 <FontAwesomeIcon :icon="faXmark" /> Cancel analysis
             </button>
         </Transition>
@@ -27,7 +27,9 @@ import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 const props = defineProps({
-    isAnalyzing: { type: Boolean, default: false }
+    isAnalyzing: { type: Boolean, default: false },
+    steps: { type: Array, default: []},
+    isDone: { type: Boolean, default: false },
 })
 
 const emit = defineEmits(['cancel'])
