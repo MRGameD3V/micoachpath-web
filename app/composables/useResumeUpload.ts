@@ -8,11 +8,14 @@ export function useResumeUpload() {
 
     const isAnalyzing = ref(false)
     const isDone = ref(false)
+    const result = ref(null)
+
     let eventSource: EventSource | null = null
 
     async function analyze(file: File) {
         isAnalyzing.value = true
         isDone.value = false
+        result.value = null
         resetSteps()
 
         // 1. Upload file first
@@ -28,31 +31,33 @@ export function useResumeUpload() {
         eventSource = new EventSource(`/api/analyze-resume/status/${jobId}`)
 
         eventSource.onmessage = (event) => {
-            const { step, status } = JSON.parse(event.data);
+            const parsed = JSON.parse(event.data);
 
-            const found = steps.value.find(s => s.key === step)
-            if(found) found.status = status
-
-            const index = steps.value.findIndex(s => s.key === step)
-            if(steps.value[index + 1]) {
-                steps.value[index + 1].status = 'loading'
-            }
-
-            if(step === 'generating_path' && status === 'done') {
+            if(parsed.type === 'result') {
+                result.value = parsed.career_path
                 isDone.value = true
                 isAnalyzing.value = false
+
+                steps.value.forEach(s => s.status = 'done')
                 eventSource?.close()
+                return
             }
+
+            const found = steps.value.find(s => s.key === parsed.step)
+            if(found) found.status = parsed.status
+
+            const index = steps.value.findIndex(s => s.key === parsed.step)
+            if(steps.value[index + 1]) steps.value[index + 1].status = 'loading'
         }
 
-        eventSource.onerror = () => {
-            cancel()
-        }
+        eventSource.onerror = () => cancel()
     }
 
     function cancel() {
         eventSource?.close()
         isAnalyzing.value = false
+        isDone.value = false
+        result.value = null
         resetSteps()
     }
 
@@ -60,5 +65,5 @@ export function useResumeUpload() {
         steps.value.forEach(s => s.status = 'pending')
     }
 
-    return { steps, isAnalyzing, isDone, analyze, cancel }
+    return { steps, isAnalyzing, result, isDone, analyze, cancel }
 }

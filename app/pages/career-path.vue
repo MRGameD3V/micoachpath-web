@@ -5,58 +5,63 @@
             <p class="text-md py-2">View and select your next greatest professional step, based on your current role.</p>
         </div>
         <div class="flex flex-col gap-8">
-            <div class="tabs tabs-bordered">
-                <button v-for="tab in tabs" :key="tab" class="tab" :class="activeTab === tab ? 'tab-active font-semibold' : 'text-base-content/40'" @click="activeTab = tab">
-                    {{ tab }}
-                </button>
+            <div v-if="!result" class="flex flex-col items-center justify-center py-24 gap-4 text-base-content/40">
+                <FontAwesomeIcon :icon="faSadCry" class="text-5xl"/>
+                <p class="text-lg font-medium">You haven't analyzed your resume yet.</p>
+                <NuxtLink to="/resume/upload" class="btn btn-success btn-xl">Upload resume <FontAwesomeIcon :icon="faChevronCircleRight" /></NuxtLink>
             </div>
+            <template v-else>
+                <div class="tabs tabs-bordered">
+                    <button v-for="tab in tabs" :key="tab" class="tab" :class="activeTab === tab ? 'tab-active font-semibold' : 'text-base-content/40'" @click="activeTab = tab">
+                        {{ tab }}
+                    </button>
+                </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <PathCard v-for="path in paths" :key="path.title" v-bind="path" />
-            </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <PathCard v-for="path in paths" :key="path.title" v-bind="path" />
+                </div>
+            </template>
         </div>
     </section>
 </template>
 <script setup lang="ts">
+import { faChevronCircleRight, faSadCry } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import PathCard from '~/components/PathCard.vue';
-const tabs = ['All paths', 'Path 1: Android Architect', 'Path 2: Manager', 'Path 3: Game Dev']
+
+const { result } = useResumeUpload()
+
+const tabs = computed(() => [
+    'All paths',
+    ...result.value?.recommended_paths.map((path, i) => `Path ${i + 1}: ${path.title}`) ?? []
+])
+
 const activeTab = ref('All paths')
 
-const paths = [
-    {
-        icon: '📐', 
-        score: 95, 
-        title: 'Android Architect', 
-        description: 'Technical depth to design complex mobile systems and infrastructure.', 
-        skillsLabel: 'REQUIRED SKILLS', 
-        skills: ['Hilt/Koin', 'API Migrations', 'Unit Testing', 'UI Components'], 
-        highlight: [], 
-        ctaLabel: 'Explore This Path', 
-        ctaIcon: '→', 
-        color: '#111827', 
-    }, 
-    { 
-        icon: '👥', 
-        score: 88,
-        title: 'Engineering Manager', 
-        description: 'Leverage your background as a Development Lead, Professor, and Mentor.', 
-        skillsLabel: 'LEADERSHIP SKILLS', 
-        skills: ['Mentoring', 'Recruitment', 'Project Mgmt', 'Public Speaking'], 
-        highlight: [], 
-        ctaLabel: 'Explore This Path', 
-        ctaIcon: '→', 
-        color: '#4B5563', 
-    }, 
-    { 
-        icon: '🎮', 
-        score: 75, 
-        title: 'Mobile Game Dev', 
-        description: "Aligned with your Master's in Multimedia Design and personal passion.", 
-        skillsLabel: 'MULTIMEDIA STACK', skills: ['Android Perf', 'UI/UX', 'WearOS'], 
-        highlight: ['Android Perf'], 
-        ctaLabel: 'Explore This Path', 
-        ctaIcon: '→', 
-        color: '#7C3AED',
-    },
-]
+const paths = computed(() => 
+    result.value?.recommended_paths.map(path => ({
+        icon: iconByPath(path.path_id),
+        score: path.match_score,
+        title: path.title,
+        description: path.candidate_fit_summary,
+        skillsLabel: 'REQUIRED SKILLS',
+        skills: path.current_strengths,
+        highlight: [],
+        ctaLabel: 'Explore this path',
+        ctaIcon: '->',
+        color: colorByPath(path.path),
+        detail: path
+    }))
+)
+
+/* Next steps: these methods should be on API or having a general way of assigning them. */
+function iconByPath(id: string) {
+    return {
+        
+    }
+}
+
+function colorByPath(id: string) {
+
+}
 </script>
