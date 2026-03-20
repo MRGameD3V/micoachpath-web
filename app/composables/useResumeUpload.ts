@@ -79,8 +79,6 @@ export function useResumeUpload() {
     }
 
     function handleEvent(parsed: any) {
-        console.log(parsed)
-
         if (parsed.type === 'start') return
 
         if (parsed.type === 'result') {

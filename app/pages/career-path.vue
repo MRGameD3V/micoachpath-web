@@ -25,9 +25,14 @@
                     </button>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-6">
+                <div v-if="!activePath" class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-6">
                     <PathCard v-for="path in paths" :key="path.title" v-bind="path" />
                 </div>
+                <PathDetail v-else
+                    :path="activePath"
+                    :icon="iconByPath(activePath.path_id)"
+                    :color="colorByPath(activePath.path_id)"
+                    @back="activeTab = 'All paths'" />
             </template>
         </div>
     </section>
@@ -36,6 +41,7 @@
 import { faChevronCircleRight, faSadCry } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import PathCard from '~/components/PathCard.vue';
+import PathDetail from '~/components/PathDetail.vue';
 
 const { result } = useResumeUpload()
 
@@ -45,6 +51,13 @@ const tabs = computed(() => [
 ])
 
 const activeTab = ref('All paths')
+
+const activePath = computed(() => {
+    if(activeTab.value === 'All paths') return null
+
+    const idx = tabs.value.indexOf(activeTab.value) - 1
+    return result.value?.recommended_paths[idx] ?? null
+})
 
 const paths = computed(() => 
     result.value?.recommended_paths.map(path => ({
