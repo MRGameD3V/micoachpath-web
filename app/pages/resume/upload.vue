@@ -4,7 +4,7 @@ import DropZone from '~/components/DropZone.vue';
 import FormatCard from '~/components/FormatCard.vue';
 
 useHead({
-    title: 'miCoach Path - Upload resume',
+    title: 'PathMaker - Upload resume',
 })
 
 const selectedFile = ref(null)

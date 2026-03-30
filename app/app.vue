@@ -1,5 +1,5 @@
 <template>
-  <div data-theme="micoach" class="flex min-h-screen bg-base-100">
+  <div class="flex min-h-screen bg-base-100">
     <Sidebar />
     <div class="flex-1 flex flex-col">
       <Navbar />

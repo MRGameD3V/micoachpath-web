@@ -1,8 +1,8 @@
-# miCoach Path
+# PathMaker
 
-miCoach Path is a proposal for generating a career path wit Generative AI taking as source a PDF resume.
+PathMaker is a proposal for generating a career path wit Generative AI taking as source a PDF resume.
 
-The objective of this module is to have a tool that help ITJ, miCoach or any organization to build a career path, keeping motivated to its colleagues and/or employees and having measurements of its goals, paths and OKR's.
+The objective of this module is to have a tool that help any organization to build a career path, keeping motivated to its colleagues and/or employees and having measurements of its goals, paths and OKR's.
 
 This development is built with VueJS + Nuxt + DaisyUI, using FontAwesome for icons.
 
@@ -18,7 +18,7 @@ Finally assign the URL from the running backend. If you're using directly at loc
 
 Ensure you're using the library manager of your preference and will be the one you'll use, unless you want to rebuild again everything :P.
 
-miCoach Path is compatible with the following managers:
+PathMaker is compatible with the following managers:
 - npm
 - pnpm
 - yarn
@@ -87,7 +87,7 @@ bun run preview
 
 ## Docs
 
-Here you have interesting docs about used technology in the miCoach Path frontend.
+Here you have interesting docs about used technology in the PathMaker frontend.
 
 - [Nuxt Content documentation](https://content.nuxt.com)
 - [Nuxt deployment documentation](https://nuxt.com/docs/getting-started/deployment)
